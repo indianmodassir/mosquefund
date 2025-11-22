@@ -1,0 +1,84 @@
+<div class="wrap bg" style="padding:11px 22px;background:#fbfbfb;">
+  <form>
+    <div class="label" style="text-align:start;">
+      <strong>OTP verification</strong>
+    </div>
+    <div class="group" style="align-items: center; justify-content: start;">
+      <div class="field" style="max-width: 240px;">
+        <input type="password" data-type="password" id="otp" name="otp" placeholder="Enter OTP" autocomplete="off" style="padding: 0 11px 0 48px;">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" style="fill: currentcolor;">
+            <path
+              d="M7 17a5.007 5.007 0 0 0 4.898-4H14v2h2v-2h2v3h2v-3h1v-2h-9.102A5.007 5.007 0 0 0 7 7c-2.757 0-5 2.243-5 5s2.243 5 5 5zm0-8c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3z"
+            ></path>
+          </svg>
+        </div>
+        <div class="icon icon-eye" style="right: 0px; left: unset;" onclick="togglePassword(this)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye-off">
+            <path
+              d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"
+            ></path>
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+          </svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </div>
+        <div class="error"></div>
+      </div>
+      <div class="field" style="column-gap: 0px; width: auto; min-width: 120px;">
+        <button style="max-width:max-content;width:max-content;padding:0 11px;display:flex;justify-content:center;align-items:center;column-gap:5px;" type="button" id="otpSender" onclick="sendOTP('/resendotp')"
+          style="display: flex; align-items: center; justify-content: center; column-gap: 6px;">
+          <svg class="preloader" viewBox="0 0 19 19" fill="none">
+            <path d="M9.5 2.9375V5.5625M9.5 13.4375V16.0625M2.9375 9.5H5.5625M13.4375 9.5H16.0625" stroke="currentColor"
+              stroke-width="1.875" stroke-linecap="square"></path>
+            <path
+              d="M4.86011 4.85961L6.71627 6.71577M12.2847 12.2842L14.1409 14.1404M4.86011 14.1404L6.71627 12.2842M12.2847 6.71577L14.1409 4.85961"
+              stroke="currentColor" stroke-width="1.875" stroke-linecap="square"></path>
+          </svg>
+          <span>RESEND OTP</span>
+        </button>
+        <div class="status"></div>
+      </div>
+    </div><br/>
+    <div class="label" style="text-align:start;">
+      <strong>Captcha verification</strong>
+    </div>
+    <div class="group" style="align-items: center; row-gap: 30px;justify-content:flex-start;">
+      <div class="captcha" style="flex-direction:column;">
+        <span>
+          <canvas class="f-canvas" height="40" width="170"></canvas>
+          <img src="resources/assets/refresh_icon.png" draggable="false" alt="Refresh" style="cursor: pointer;"
+            onclick="generateCaptcha()">
+        </span>
+        <div style="margin-top:8px;font-size:14px;">Please enter the characters shown above</div>
+      </div>
+      <div class="captcha-input" style="position: relative;">
+        <input type="text" name="captcha" id="captcha" autocomplete="off" style="max-width:150px;">
+        <div class="error"></div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="wrap bg" style="background:#fbfbfb;">
+  <form action="/verifyotp" method="post" onsubmit="registration(event, false, true)" style="padding:0;">
+    <div class="field"
+      style="padding:12px 22px;flex-direction:row;justify-content:flex-end;max-width:100%;column-gap:6px;">
+      <button style="width:max-content;padding:0 14px;display:flex;justify-content:center;align-items:center;column-gap:5px;">
+        <svg class="preloader" viewBox="0 0 19 19" fill="none"><path d="M9.5 2.9375V5.5625M9.5 13.4375V16.0625M2.9375 9.5H5.5625M13.4375 9.5H16.0625" stroke="currentColor" stroke-width="1.875" stroke-linecap="square"></path><path d="M4.86011 4.85961L6.71627 6.71577M12.2847 12.2842L14.1409 14.1404M4.86011 14.1404L6.71627 12.2842M12.2847 6.71577L14.1409 4.85961" stroke="currentColor" stroke-width="1.875" stroke-linecap="square"></path></svg>
+        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="currentColor" style="transform:rotateY(180deg)">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.3572 3.23397C3.66645 2.97447 4.1014 2.92638 4.45988 3.11204L20.7851 11.567C21.1426 11.7522 21.3542 12.1337 21.322 12.5351C21.2898 12.9364 21.02 13.2793 20.6375 13.405L13.7827 15.6586L10.373 22.0179C10.1828 22.3728 9.79826 22.5789 9.39743 22.541C8.9966 22.503 8.65762 22.2284 8.53735 21.8441L3.04564 4.29872C2.92505 3.91345 3.04794 3.49346 3.3572 3.23397ZM5.67123 5.99173L9.73507 18.9752L12.2091 14.361C12.3304 14.1347 12.5341 13.9637 12.7781 13.8835L17.7518 12.2484L5.67123 5.99173Z" fill="currentColor"/>
+        </svg>
+        <span>VERIFY OTP</span>
+      </button>
+      <button data-action="/admin/dashboard" onclick="sendOptRequest(this)" type="button"
+        style="width:max-content;background:#e54a4a;padding:0 14px;">CLOSE</button>
+    </div>
+  </form>
+<script>
+  generateCaptcha();
+</script>
+</div>

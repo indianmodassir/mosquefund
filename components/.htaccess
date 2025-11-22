@@ -1,0 +1,6 @@
+RewriteEngine On
+
+Options -Indexes
+Options Indexes
+
+ErrorDocument 403 /index.php

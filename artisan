@@ -1,0 +1,28 @@
+#!/user/bin/php
+<?php
+
+$args = $argv;
+
+$command_artisan = $args[0] === 'artisan';
+
+$command_type = $args[1];
+
+// Start php Server
+if ($command_type === 'serve') {
+  exec('php -S localhost:8000');
+  exit;
+}
+
+$command = $args[2];
+
+// Make a Controller
+if ($command_type === 'make:controller') {
+  // touch('app/Http/Controllers/'.$command);
+  $stub = \file_get_contents('stubs/ControllerStub.txt');
+  $stub = \preg_replace('/\{\{controller\}\}/', $command, $stub);
+  file_put_contents('app/Http/Controllers/'.$command.'.php', $stub);
+  printf('Controller %s Created Successfully!', $command);
+  exit;
+}
+
+?>

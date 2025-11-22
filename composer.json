@@ -1,0 +1,29 @@
+{
+  "name": "indianmodassir/mosquefund",
+  "description": "",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "files": [
+      "app/Helper/Helper.php"
+    ],
+    "psr-4": {
+      "Modassir\\": "app/"
+    }
+  },
+  "require": {
+    "php": ">=8.0",
+    "lazervel/cryptor": "^1.0",
+    "lazervel/mailsender": "^1.0",
+    "lazervel/dotenv": "^2.0"
+  },
+  "author": [
+    {
+      "name": "Indian Modassir",
+      "email": "indianmodassir@gmail.com"
+    }
+  ],
+  "homepage": "https://github.com/indianmodassir",
+  "minimum-stibility": "stable",
+  "prefer-stable": true
+}
