@@ -11,6 +11,7 @@
         <li data-action="/admin/request" onclick="sendOptRequest(this)">Registration Reqeust</li>
         <li data-action="/admin/final_request" onclick="sendOptRequest(this)">Final Request</li>
         <li data-action="/admin/members" onclick="sendOptRequest(this)">Connected Members</li>
+        <li data-action="/admin/all_request" onclick="sendOptRequest(this)">All Request Data</li>
         <li onclick="logout()">Logout</li>
       </ul>
     </li>

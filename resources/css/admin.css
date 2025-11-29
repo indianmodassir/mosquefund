@@ -62,7 +62,7 @@ body {
 button:not(:disabled) {
   cursor: pointer;
 }
-form button {
+form button, .b_success button {
   background: #00a65a;
   font-size: 15px;
   color: #fff;
@@ -102,7 +102,7 @@ label {
 .wrap.bg:not(:last-child) {
   padding: 11px;
 }
-#output, #AmountOutput {
+#output, #AmountOutput, #output1, #afdvt {
   color: #06b306;
   font-weight: 600;
 }
@@ -178,4 +178,39 @@ label:has(.switch) input[type=checkbox]:checked + .switch::before {
 }
 .dashboard li {
   cursor: default;
+}
+.b_success {
+  row-gap: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+}
+.b_success h1 {
+  column-gap: 5px;
+  display: flex;
+  color: #479947;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.b_success button {
+  margin: 0 8px;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  padding: 0 11px;
+  width: fit-content;
+  font-size: 14px;
+  border-radius: 5px;
+  height: 38px;
+  outline: none;
+  border: 1px solid #ced4da;
+  -webkit-font-smoothing: antialiased;
+}
+.b_success button:first-child {
+  background: #317ba7;
+  border-color: #2e6f94;
+}
+.b_success button:first-child:focus {
+  box-shadow: 0 0 0 .2rem #317ca783;
 }

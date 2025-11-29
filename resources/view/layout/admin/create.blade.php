@@ -1,6 +1,5 @@
 <style>#xcontent {background:#eee;}</style>
-<div class="notice" style="margin-top:0;">
-  <h3>{{\ucwords($control)}} Registration फॉर्म / Form-XII</h3>
+<div class="notice" style="margin-top:0;padding-top:33px;">
   <h4>पंजीकरण फॉर्म हेतु आवेदन-पत्र / {{\ucwords($control)}} ({{$fullname}})</h4>
   <h3>Application Form for {{\ucwords($control)}} Registration from Registered by {{\ucwords($role)}} ({{$fullname}})</h3>
   <br/>

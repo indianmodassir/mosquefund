@@ -112,6 +112,17 @@ class Forgotten
       $Auth->exportJSON('error', 'Confirm password does not match', '#confPass');
     }
 
+    // Check Strong Password
+    $passLen = strlen($password);
+    if ($passLen < 6 || $passLen > 30) {
+      $Auth->exportJSON('error', 'Password must be greater equal 6 and less than equal 30', '#password');
+    }
+
+    $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-+=|\\;:\'"?\/<>,\[\]{}]).{6,}$/';
+    if (!preg_match($pattern, $password)) {
+      $Auth->exportJSON('error', 'Choose strong password [123@Pass] combination.', '#password');
+    }
+
     $expect_vid_token = $request['vid-token'];
     $vid_token = session()->get('vid-token');
 

@@ -6,6 +6,7 @@ use Modassir\Http\Request\Request;
 use Modassir\Http\Model\Collector as CollectModel;
 use Modassir\Http\Model\MemberModal;
 use Modassir\Http\Model\Owner;
+use Modassir\Http\Model\Spent;
 
 class Collector extends MemberModal
 {
@@ -58,9 +59,16 @@ class Collector extends MemberModal
 
     $data['last_collected_date'] = $collected_time;
     $data['next_collected_date'] = $date->format('d-m-Y h:i:s A');
+    $root = 'collector';
+
+    if ($component === 'expense_data') {
+      $expenses = Spent::findAll($owner->number);
+      $data['expenses'] = $expenses->toArray();
+      $root = 'owner';
+    }
 
     $session->put('opt_request_id', encrypt($session->get('logged_session')));
-    view("layout.collector.{$component}")->with($data);
+    view("layout.{$root}.{$component}")->with($data);
   }
 }
 ?>

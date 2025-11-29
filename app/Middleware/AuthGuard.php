@@ -15,6 +15,8 @@ class AuthGuard
   private $session;
   private $route;
   private $loginInfo;
+  public $secretries;
+  public $members;
 
   private $loggings = ['/admin', '/owner', '/collector'];
   
@@ -25,6 +27,8 @@ class AuthGuard
     $this->admin();
     $this->owner();
     $this->collector();
+    $this->secretries = Owner::all();
+    $this->members = Member::all();
   }
 
   private function checkLogged($isLogged, string $route)

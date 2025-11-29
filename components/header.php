@@ -45,11 +45,11 @@ if ($response_code === 403) {
   </dialog>
 
   <!-- Nav Bar -->
-  <nav>
+  <nav style="background:#fff;">
     <div class="logo">
       <img src="resources/assets/logo.png" alt="logo" width="100" height="100" draggable="false">
     </div>
-    <div class="header-text">
+    <div class="header-text" style="color:#22458a;">
       <div class="upper-text">
         <h1><?=$_ENV['APP_NAME']?></h1>
       </div>

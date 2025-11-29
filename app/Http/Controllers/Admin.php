@@ -55,7 +55,7 @@ class Admin extends MailSender
       'collector_id'
     ]);
 
-    $pattern = '/^(?:request|final_request|dashboard)$/';
+    $pattern = '/^(?:request|final_request|all_request|dashboard)$/';
 
     $isForwarded = false;
     $isFinal = false;

@@ -66,7 +66,7 @@
     @foreach($requests as $i => $request)
       @if (($request['approval_time'] && ($request['approval_time'] <= $time)) && $request['approval'] === "")
         <tr>
-          <td>{{$i + 1}}</td>
+          <td>{{$i}}</td>
           <td>{{$request['fullname']}}</td>
           <td>{{$request['number']}}</td>
           <td>{{$request['email']}}</td>
@@ -160,7 +160,7 @@
               </tr>
               <tr>
                 <td>फील्ड सत्यापन स्थिति</td>
-                <td>: ${isResolved ? "✓ सत्यापित कर दिया गया" : "✗ अस्वीकार कर दिया गया"}</td>
+                <td>: ${isResolved ? "सत्यापित कर दिया गया ✓" : "अस्वीकार कर दिया गया ✗"}</td>
               </tr>
             </table>
             <table>

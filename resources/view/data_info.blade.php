@@ -85,8 +85,8 @@ if ($field_verification) {
   \array_push($status, [
     'task' => $field_rejected ? 'Approval of Rejected False Application' : 'Approval of Verified True Application',
     'details' => 'N/A',
-    'issued' => $approval === '' ? 'Under Process' : ($field_rejected ? '<a onclick="showReason(true)">Rejected Details</a>' : 'Nil'),
-    'status' => $approval === '' ? 'N/A' : ($field_rejected ? 'Rejected' : 'Delivered'),
+    'issued' => $approval === '' ? 'Under Process' : ($field_rejected || $approval == 0 ? '<a onclick="showReason(true)">Rejected Details</a>' : 'Nil'),
+    'status' => $approval === '' ? 'N/A' : ($field_rejected || $approval == 0 ? 'Rejected' : 'Delivered'),
     'remarks' => 'N/A'
   ]);
 }
@@ -148,7 +148,7 @@ if ($field_verification) {
   let textBackup;
   function showReason(rejected) {
     if (rejected) {
-      textBackup = $('#rejected').text();
+      if (!textBackup) textBackup = $('#rejected').text();
       $('#rejected').text('ADMINISTRATOR (INDIAN MODASSIR) DVARA AAPKA REGISTRATION REQUEST REJECT KIYA JA CHUKA HAI. AAVEDAK DUBARA REGISTRATION KAR SAKTA HAI.');
     } else if (textBackup) {
       $('#rejected').text(textBackup);

@@ -11,11 +11,11 @@ use Modassir\Http\Model\MemberDetails;
 
 class FetchMember
 {
-  public function fetch(Request $request, $number = null)
+  public function fetch(Request $request, ?bool $isReciept = false, ?MemberDetails $member_details = null)
   {
     $req = $request->all();
     $fetch_type = $req['fetch_type'];
-    $number = $number ?? $req['uid'] ?? $req['member-id'];
+    $number = $req['uid'] ?? $req['member-id'] ?? null;
 
     $session = session();
     $optReqId = $session->get('opt_request_id');
@@ -25,10 +25,14 @@ class FetchMember
     $member = Member::select('number', $number);
 
     if (!$member) {
+      $member = Member::select('number', $member_details->number);
+    }
+
+    if (!$member) {
       die(\json_encode([
         'error' => true,
-        'message' => 'Member Not Found!',
-        'selector' => isset($req['member-id']) ? '#memberId' : null
+        'message' => $isReciept ? 'FRN Not Found!' : 'Member Not Found!',
+        'selector' => $isReciept ? '#frn' : '#memberId'
       ]));
     }
 
@@ -67,8 +71,21 @@ class FetchMember
     $base64 = 'data:' . $fileType . ';base64,' . \base64_encode($imageData);
     $member->profile = $base64;
 
-    $member_details = MemberDetails::findAll($number)->toArray();
-
+    if (!$member_details) {
+      $member_details = MemberDetails::findAll($number)->toArray();
+    } else {
+      $member_details = [[
+        'id' => $member_details->id,
+        'number' => $member_details->number,
+        'frn' => $member_details->frn,
+        'year' => $member_details->year,
+        'paid_from' => $member_details->paid_from,
+        'paid_to' => $member_details->paid_to,
+        'date' => $member_details->date,
+        'paid_amount' => $member_details->paid_amount
+      ]];
+    }
+    
     if ($fetch_type !== 'all') {
       $member_details = [\end($member_details)];
     }
@@ -162,7 +179,7 @@ class FetchMember
     $paid_data = json_decode($collector->paid_data, true);
     $last_collected = $collector->collected;
     $last_collected = (int)$last_collected + $dueFee;
-    array_push($paid_data, $number);
+    if (!in_array($number, $paid_data)) array_push($paid_data, $number);
 
     $owner_id_from_member = $member->owner_id;
     $secretray = Owner::select('number', $collector->connect_id);

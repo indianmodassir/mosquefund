@@ -18,6 +18,7 @@ use Modassir\Http\Controllers\FetchMember;
 require __DIR__.'/../config/app.php';
 
 Route::post('/download', [GeneratePDF::class, 'recieptInfo']);
+Route::post('/reciept', [GeneratePDF::class, 'recieptInfo']);
 Route::post('/generatepdf', [GeneratePDF::class, 'generate']);
 Route::post('/fetchmember', [FetchMember::class, 'fetch']);
 Route::post('/confirm_payment', [FetchMember::class, 'confirm']);
@@ -27,12 +28,14 @@ Route::group('/collector', function() {
   Route::get('dashboard', [Collector::class, 'index']);
   Route::get('find', [Collector::class, 'index']);
   Route::get('all', [Collector::class, 'index']);
+  Route::get('expense_data', [Collector::class, 'index']);
 });
 
 Route::group('/admin', function() {
   Route::get('dashboard', [Admin::class, 'index']);
   Route::get('request', [Admin::class, 'index']);
   Route::get('final_request', [Admin::class, 'index']);
+  Route::get('all_request', [Admin::class, 'index']);
   Route::get('manage', [Admin::class, 'index']);
   Route::get('create', [Admin::class, 'index']);
   Route::get('members', [Admin::class, 'index']);
@@ -45,10 +48,13 @@ Route::group('/admin', function() {
 Route::group('/owner', function() {
   Route::get('dashboard', [Owner::class, 'index']);
   Route::get('addmember', [Owner::class, 'index']);
+  Route::get('addspend', [Owner::class, 'index']);
   Route::get('manage', [Owner::class, 'index']);
   Route::get('view_profile', [Owner::class, 'index']);
+  Route::get('expense_data', [Owner::class, 'index']);
   Route::post('enable_disable', [Owner::class, 'manageCollectorLogin']);
   Route::post('delete', [Owner::class, 'deleteMember']);
+  Route::post('spent', [Owner::class, 'addspend']);
 });
 
 Route::post('/registration1', [Registration::class, 'index']);
@@ -82,7 +88,7 @@ Route::group('/login', function() {
   Route::post('owner', [Login::class, 'OwnerLogin']);
   Route::post('collector', [Login::class, 'CollectorLogin']);
   Route::post('member', [Login::class, 'MemberLogin']);
-  Route::post('reciept', [Login::class, 'recieptInfo']);
+  // Route::post('reciept', [Login::class, 'recieptInfo']);
 });
 
 Route::post('/request_registration', [RequestRegistration::class, 'index']);

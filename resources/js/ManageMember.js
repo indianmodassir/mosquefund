@@ -1,3 +1,4 @@
+let trGT = 0;
 function fetchMemberInfo(target) {
   const uid = target.dataset['uid'];
   const fetchType = target.dataset['fetchType'];
@@ -11,9 +12,24 @@ function fetchMemberInfo(target) {
 
   post('/fetchmember', {data}).then(response => {
     $('.response').html(response);
+
+    const totalRow = $('#payed tr').length;
+    $('#payed tr:gt(4)').attr('hidden', true);
+    trGT = 4;
+
+    if (totalRow > 5) {
+      $('#showMore').attr('hidden', null);
+    }
   }).catch(_err => {
     alert('Internal Server Error!');
   });
+}
+
+function showMore() {
+  $(`#payed tr[hidden]:lt(5)`).attr('hidden', null);
+  if (!$('#payed tr[hidden]').length) {
+    $('#showMore').attr('hidden', true);
+  }
 }
 
 function confirmPayment(data, button)

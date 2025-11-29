@@ -8,6 +8,9 @@
         <li data-action="/owner/view_profile" onclick="sendOptRequest(this)">View Profile (Secretary)</li>
         <li data-action="/owner/addmember" onclick="sendOptRequest(this)">Add Member</li>
         <li data-action="/collector/all" onclick="sendOptRequest(this)">Manage Member</li>
+        <li data-login="reciept" id="check_reciept" data-csrf="{{@csrf}}" onclick="login(this)">Check Reciept</li>
+        <li data-action="/owner/addspend" onclick="sendOptRequest(this)">Add Expense (Record)</li>
+        <li data-action="/owner/expense_data" onclick="sendOptRequest(this)">All Expense Data</li>
         <li onclick="logout()">Logout</li>
       </ul>
     </li>

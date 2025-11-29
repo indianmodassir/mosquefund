@@ -1,31 +1,40 @@
 CREATE TABLE `admin`(
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `fullname` varchar(40) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `otp` int(11) NOT NULL DEFAULT 0,
-  `session` varchar(100) NOT NULL DEFAULT '',
-  `frn` varchar(100) NOT NULL
+  `fullname` varchar(40) NOT NULL,            -- Admin Fullname
+  `email` varchar(50) NOT NULL,               -- Admin Email Auth
+  `password` varchar(255) NOT NULL,           -- Admin Password
+  `otp` int(11) NOT NULL DEFAULT 0,           -- Admin OTP
+  `session` varchar(100) NOT NULL DEFAULT '', -- Login Session
+  `frn` varchar(100) NOT NULL                 -- FRN Generator Iniail Value
 );
 
+-- Register Admin
 INSERT INTO `admin` (`id`,`fullname`,`email`,`password`,`frn`) VALUES('1', 'Indian Modassir', 'indianmodassir@gmail.com', '$2y$10$Q5n5xmF/DDvWTzo.Gv4uNuQeZWKmKha5oTVPpBALxSSG17WhUbNwW', '100310180359017');
 
 CREATE TABLE `owner`(
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `fullname` varchar(40) NOT NULL,
-  `number` varchar(50) NOT NULL DEFAULT '',
-  `email` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `district` varchar(100) NOT NULL,
-  `circle` varchar(100) NOT NULL,
-  `village` varchar(100) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `otp` int(11) NOT NULL DEFAULT 0,
-  `collector_id` varchar(100) NOT NULL DEFAULT '',
-  `disabled` int(2) NOT NULL DEFAULT 0,
-  `access` int(2) NOT NULL DEFAULT 0,
-  `collected` int(11) NOT NULL DEFAULT 0,
-  `session` varchar(100) NOT NULL DEFAULT ''
+  `fullname` varchar(40) NOT NULL,                 -- Secretary Fullname
+  `number` varchar(50) NOT NULL DEFAULT '',        -- Secretary Number
+  `email` varchar(50) NOT NULL,                    -- Secretary Email
+  `password` varchar(255) NOT NULL,                -- Secretary Password
+  `district` varchar(100) NOT NULL,                -- Secretary District
+  `circle` varchar(100) NOT NULL,                  -- Secretary Circle/Block
+  `village` varchar(100) NOT NULL,                 -- Secretary Village
+  `address` varchar(255) NOT NULL,                 -- Secretary Full Address
+  `otp` int(11) NOT NULL DEFAULT 0,                -- Secretary OTP
+  `collector_id` varchar(100) NOT NULL DEFAULT '', -- Collector ID of Collector
+  `disabled` int(2) NOT NULL DEFAULT 0,            -- Secretary Account Enabled/Disabled
+  `access` int(2) NOT NULL DEFAULT 0,              -- Collector Account Access Status
+  `collected` int(11) NOT NULL DEFAULT 0,          -- Overall Collection Amount
+  `session` varchar(100) NOT NULL DEFAULT ''       -- Login Session
+);
+
+CREATE TABLE `spent`(
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `number` varchar(50) NOT NULL,    -- Secretary Number
+  `amount` int(11) NOT NULL,        -- Spend Amount
+  `describe` varchar(500) NOT NULL, -- Spend Describe
+  `date` varchar(100) NOT NULL      -- Spend Date
 );
 
 CREATE TABLE `request`(

@@ -17,12 +17,6 @@ class Login extends Captcha
   private $exports = [];
   private $request;
 
-  public function __construct(bool $printable = true)
-  {
-    $Auth = new AuthGuard;
-    if ($Auth->isAuthorized && $printable) die(\json_encode($Auth));
-  }
-
   /**
    * Developer Login
    */
@@ -139,14 +133,19 @@ class Login extends Captcha
   public function MemberLogin(Request $request)
   {
     $req = $request->all();
-    $this->checkData(['member-id', 'captcha'], $req);
+    $this->checkData(['captcha'], $req);
     $isReceipt = $req['reciept'] ?? null;
-    $memberId = $req['member-id'];
+    $memberId = $req['member-id'] ?? $req['frn'];
     
     $this->checkCSRF($req['csrf'] ?? $req['csrf-token']);
-    $this->checkEmptyField($memberId, 'Member ID', '#memberId');
+    $this->checkEmptyField($memberId, $isReceipt ? 'FRN' : 'Member ID', $isReceipt ? '#frn' : '#memberId');
     $this->checkEmptyField($req['captcha'], 'Captcha', '#captcha');
     $this->verifyCaptcha($req['captcha']);
+
+    if (!$isReceipt) {
+      $request->validate(['number' => $memberId], '#memberId', 'Member ID');
+    }
+
     $fetchMember = new FetchMember();
     $member = MemberDetails::select('frn', $memberId);
 
@@ -155,7 +154,7 @@ class Login extends Captcha
     }
 
     \ob_start();
-    $fetchMember->fetch($request, $member ? $member->number : null);
+    $fetchMember->fetch($request, $isReceipt, $member);
     $body = \ob_get_clean();
 
     die(\json_encode(['body' => $body, 'notCaptcha' => true]));

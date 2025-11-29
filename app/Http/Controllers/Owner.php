@@ -8,6 +8,7 @@ use Modassir\Http\Model\MemberModal;
 use Modassir\Http\Model\Member;
 use Modassir\Http\Model\MemberDetails;
 use Modassir\Http\Model\Owner as OwnerModal;
+use Modassir\Http\Model\Spent;
 
 class Owner
 {
@@ -73,6 +74,11 @@ class Owner
         'village' => $owner->village,
         'address' => $owner->address
       ];
+    }
+
+    if ($component === 'expense_data') {
+      $expenses = Spent::findAll($this->owner->number);
+      $request['expenses'] = $expenses->toArray();
     }
 
     view(\sprintf('layout.owner.%s', $component))->with($request);
@@ -143,6 +149,83 @@ class Owner
     } else {
       die(json_encode(['message' => 'Cannot delete member, Server error!']));
     }
+  }
+
+  public function addspend(Request $request)
+  {
+    $request = $request->all();
+    $Auth = new Login(false);
+
+    $req_keys = ['spent_amount', 'describe', 'captcha'];
+    foreach($req_keys as $key) {
+      if (!isset($request[$key])) {
+        $Auth->exportJSON('error', 'Bad Request');
+      }
+    }
+
+    $amount = $request['spent_amount'];
+    $describe = $request['describe'];
+    $captcha = $request['captcha'];
+
+    $Auth->checkEmptyField($amount, 'Spent Amount', '#spent_amount');
+    $Auth->checkEmptyField($describe, 'Spent Description', '#describe');
+    $Auth->checkEmptyField($captcha, 'Captcha', '#captcha');
+    $Auth->verifyCaptcha($captcha);
+
+    if ($amount < 1 || $amount > 1000000) {
+      $Auth->exportJSON('error', 'Invalid Spent Amount', '#spent_amount');
+    }
+
+    $descLen = strlen($describe);
+    if ($descLen < 15 || $descLen > 500) {
+      $Auth->exportJSON('error', 'Description must be greater than 15 and less than 500 character.', '#describe');
+    }
+
+    $descWords = str_word_count($describe);
+    if (is_numeric($describe) || $descWords < 3 || $descWords > 100) {
+      $Auth->exportJSON('error', 'Invalid Description', '#describe');
+    }
+
+    $secretary = OwnerModal::select('session', session()->get('logged_session'));
+
+    if (!$secretary) {
+      die(json_encode(['message' => 'Unauthorized Secretary.']));
+    }
+
+    $collected = (int)$secretary->collected; // Overall Collection Amount
+    $amount = intval($amount);
+
+    if ($collected === 0) {
+      $Auth->exportJSON('error', 'You cannot spent because your overall collection balance are (₹0).', '#spent_amount');
+    }
+
+    if ($amount > $collected) {
+      $Auth->exportJSON('error', \sprintf('Entered expense (₹%d) exceeds the current available collection (₹%d).', $amount, $collected), '#spent_amount');
+    }
+
+    date_default_timezone_set('Asia/Kolkata');
+    $spent = new Spent();
+    $spent->number = $secretary->number;
+    $spent->amount = $amount;
+    $spent->describe = strtoupper($describe);
+    $spent->date = date('d.m.y h:i:s P');
+    $spent->save(true);
+
+    $secretary->collected = $collected - $amount;
+    $secretary->save();
+
+    $html = '<div class="b_success">
+      <h1>
+        <svg width="50" height="50" viewBox="0 0 24 24" style="fill:currentColor;"><path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path></svg>
+        <span>Expense record added successfully!</span>
+      </h1>
+      <div>
+        <button data-action="/owner/dashboard" onclick="sendOptRequest(this)">Goto Dashboard</button>
+        <button data-action="/owner/addspend" onclick="sendOptRequest(this)">Add New Record</button>
+      </div>
+    </div>';
+
+    die(json_encode(['body' => $html]));
   }
 }
 ?>

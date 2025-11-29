@@ -12,6 +12,7 @@ class GeneratePDF
   public function recieptInfo(Request $request)
   {
     $data = $request->all();
+    $response_type = $data['response_type'];
     $frn = $data['frn'];
     $captcha = $data['captcha'];
     $Auth = new Login(false);
@@ -60,6 +61,8 @@ class GeneratePDF
       'frn' => \strtoupper($frn),
       'profile' => $base64,
       'fullname' => $member->fullname,
+      'from' => $reciept->paid_from,
+      'to' => $reciept->paid_to,
       'dues' => $dues,
       'paid' => $member->last_paid_amount,
       'number' => $number,
@@ -72,8 +75,13 @@ class GeneratePDF
       'date' => $last_date,
       'timestamp' => $timestamp,
       'domain' => sprintf('https://%s', $_SERVER['HTTP_HOST']),
+      'preview' => !!$response_type,
       'download' => true
     ];
+
+    if ($response_type) {
+      $recieptInfo['html'] = '<div id="content" style="margin:33px auto;max-width:1120px;"><div class="header"><button type="button" class="close" onclick="closeModel()"><span aria-hidden="true">×</span></button><h4>RECIEPT DETAILS</h4></div><div class="form-container" style="background:#eee;padding:33px;text-align:center;"><img id="reciept_preview" alt="Reciept Preview" draggable="false" style="width:100%;max-width:700px;"></div></div>';
+    }
 
     die(\json_encode($recieptInfo));
   }

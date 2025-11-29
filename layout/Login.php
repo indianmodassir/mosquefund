@@ -195,12 +195,13 @@ class Reciept extends Form
   static function Form()
   {
     return self::Create(
-      '/login/member',
+      '/reciept',
       'RECIEPT DETAILS',
       '<div class="field">
         <input type="hidden" name="reciept" value="1" autocomplete="off" />
         <input type="hidden" name="fetch_type" value="self" autocomplete="off" />
-        <input type="text" name="member-id" id="memberId" placeholder="FRN100310180359017" autocomplete="off">
+        <input type="hidden" name="response_type" value="1" autocomplete="off" />
+        <input type="text" name="frn" id="frn" placeholder="FRN100310180359017" autocomplete="off">
         '.self::RecieptIcon().'
         <div class="error"></div>
       </div>',
@@ -222,6 +223,7 @@ class Download extends Form
       '<div class="field">
         <input type="hidden" name="reciept" value="1" autocomplete="off" />
         <input type="hidden" name="fetch_type" value="self" autocomplete="off" />
+        <input type="hidden" name="response_type" value="0" autocomplete="off" />
         <input type="text" name="frn" id="frn" placeholder="FRN100310180359017" autocomplete="off">
         '.self::RecieptIcon().'
         <div class="error"></div>

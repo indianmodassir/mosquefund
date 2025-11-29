@@ -42,7 +42,7 @@
             <th style="width:0;white-space:nowrap;"><span class="en-label">Total / </span>कुल</th>
             <th style="width:0;white-space:nowrap;"><span class="en-label">Status / </span>स्थिति</th>
           </tr>
-          <tbody>
+          <tbody id="payed">
             @foreach($payments as $i => $payment)
               <tr>
                 <td>{{$i + 1}}</td>
@@ -55,6 +55,10 @@
               </tr>
             @endforeach
           </tbody>
+          <tr id="showMore" onclick="showMore()" hidden>
+            <td colspan="6"></td>
+            <td><a href="javascript:void(0)" style="font-size:14px;display:block;">See More</a></td>
+          </tr>
         </table>
       </section>
       <table class="vtable">
@@ -137,9 +141,9 @@
             <tr>
               <td id="bnote" class="nowrap" colspan="7">
                 <p>*NOTE:</p>
-                <p>यह कंप्यूटर द्वारा तैयार की गई प्रति केवल सूचनात्मक उद्देश्यों के लिए जारी की गई है। हालाँकि डेटा को अत्यंत सावधानी से संसाधित किया गया है, फिर भी अनजाने में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। सत्यापन, सुधार या किसी भी संबंधित समस्या के लिए, कृपया निकटतम मस्जिद के प्रमुख या अधिकृत समिति के प्रतिनिधि से संपर्क करें|</p>
+                <p>यह कंप्यूटर द्वारा तैयार की गई प्रति केवल सूचनात्मक उद्देश्यों के लिए जारी की गई है। हालाँकि डेटा को अत्यंत सावधानी से संसाधित किया गया है, फिर भी अनजाने में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। सत्यापन, सुधार या किसी भी संबंधित समस्या के लिए, कृपया निकटतम मस्जिद के प्रमुख या अधिकृत समिति के प्रतिनिधि से संपर्क करें या {{$owner_email}}" पर ईमेल करें या "+91 {{$owner_number}}" पर कॉल करें|</p>
                 <br/>
-                <p>This is a computer-generated copy issued for informational purposes only. Although the data has been processed with utmost care, unintentional errors or inaccuracies may still exist. For verification, corrections, or any related concerns, kindly reach out to the head of the nearest mosque or the authorized committee representative.</p>
+                <p>This is a computer-generated copy issued for informational purposes only. Although the data has been processed with utmost care, unintentional errors or inaccuracies may still exist. For verification, corrections, or any related concerns, kindly reach out to the head of the nearest mosque or the authorized committee representative. or write to us at [{{$owner_email}}] mentioning the Depostior ID and Transaction ID or Call Mobile No. "+91 {{$owner_number}}".</p>
               </td>
             </tr>
           @endif

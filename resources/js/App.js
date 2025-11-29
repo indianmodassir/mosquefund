@@ -115,30 +115,34 @@ function submitLoginForm(e) {
       !res.notCaptcha && generateCaptcha();
     } else if (res.download) {
       res.success = async (image, width, height, FRN) => {
-        const formData = new FormData();
+        if (res.preview) {
+          $('.response').html(res.html);
+          $('#reciept_preview').attr('src', image);
+        } else {
+          const formData = new FormData();
+          formData.append('height', height);
+          formData.append('image', image);
+          formData.append('width', width);
+          
+          const response = await fetch('routes/request', {
+            method: 'POST',
+            headers: {'request': '/generatepdf'},
+            body: formData
+          });
 
-        formData.append('height', height);
-        formData.append('image', image);
-        formData.append('width', width);
-        
-        const response = await fetch('routes/request', {
-          method: 'POST',
-          headers: {'request': '/generatepdf'},
-          body: formData
-        });
+          // Reset Form and Captcha
+          $('.form-container form')[0].reset();
+          generateCaptcha();
 
-        // Reset Form and Captcha
-        $('.form-container form')[0].reset();
-        generateCaptcha();
-
-        // Receive PDF blob and trigger download
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = FRN;
-        link.click();
-        $(':submit').attr('disabled', null);
+          // Receive PDF blob and trigger download
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = FRN;
+          link.click();
+          $(':submit').attr('disabled', null);
+        }
       };
       Reciept(res);
     } else {

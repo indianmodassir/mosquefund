@@ -3,8 +3,7 @@ function get(string $key, $vars) {
   return $vars[$key] ?? '';
 }
 @endphp
-<div class="notice" style="margin-top:0;">
-  <h3>Secretary Registration फॉर्म / Form-VII</h3>
+<div class="notice" style="margin-top:0;padding-top:33px;">
   <h4>पंजीकरण फॉर्म हेतु आवेदन-पत्र / Registration Form</h4>
   <h3>Application Form for Secretary Registration from Registered by Administrator (Indian Modassir)</h3>
   <br/>
