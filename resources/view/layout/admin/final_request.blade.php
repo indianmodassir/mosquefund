@@ -63,10 +63,11 @@
       <th>आवेदन संख्या</th>
       <th style="text-align:center;">विवरण देखें</th>
     </tr>
-    @foreach($requests as $i => $request)
+    @php $i = 0; @endphp
+    @foreach($requests as $request)
       @if (($request['approval_time'] && ($request['approval_time'] <= $time)) && $request['approval'] === "")
         <tr>
-          <td>{{$i}}</td>
+          <td>{{++$i}}</td>
           <td>{{$request['fullname']}}</td>
           <td>{{$request['number']}}</td>
           <td>{{$request['email']}}</td>

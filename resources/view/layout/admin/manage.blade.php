@@ -1,6 +1,6 @@
 <div id="members-list" style="overflow-y:hidden;">
   @if (count($owner))
-    <table class="vtable" style="table-layout:initial;">
+    <table class="vtable" style="table-layout:initial;min-width:900px;">
       <tr style="background:#e9eef1;">
         <th style="white-space:nowrap;">क्र० स०</th>
         <th>सचिव का नाम</th>

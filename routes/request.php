@@ -3,6 +3,7 @@
 use Modassir\Http\Route;
 use Modassir\Http\Controllers\RequestRegistration;
 use Modassir\Http\Controllers\GeneratePDF;
+use Modassir\Http\Controllers\DatabaseManager;
 use Modassir\Http\Controllers\Logout;
 use Modassir\Http\Controllers\Login;
 use Modassir\Http\Controllers\Captcha;
@@ -14,6 +15,7 @@ use Modassir\Http\Controllers\Collector;
 use Modassir\Http\Controllers\Owner;
 use Modassir\Http\Controllers\MemberRegistration;
 use Modassir\Http\Controllers\FetchMember;
+use Modassir\Http\Controllers\ExpenseData;
 
 require __DIR__.'/../config/app.php';
 
@@ -23,6 +25,7 @@ Route::post('/generatepdf', [GeneratePDF::class, 'generate']);
 Route::post('/fetchmember', [FetchMember::class, 'fetch']);
 Route::post('/confirm_payment', [FetchMember::class, 'confirm']);
 Route::post('/logout', [Logout::class, 'logout']);
+Route::post('/fetch_expense', [ExpenseData::class, 'index']);
 
 Route::group('/collector', function() {
   Route::get('dashboard', [Collector::class, 'index']);
@@ -40,9 +43,11 @@ Route::group('/admin', function() {
   Route::get('create', [Admin::class, 'index']);
   Route::get('members', [Admin::class, 'index']);
   Route::get('view_profile', [Admin::class, 'index']);
+  Route::get('database', [Admin::class, 'index']);
   Route::post('enabled_disable', [Admin::class, 'manage']);
   Route::post('verify_field', [Admin::class, 'verifyField']);
   Route::post('final_verify', [Admin::class, 'finalVerification']);
+  Route::post('truncate', [DatabaseManager::class, 'truncate']);
 });
 
 Route::group('/owner', function() {
@@ -88,7 +93,6 @@ Route::group('/login', function() {
   Route::post('owner', [Login::class, 'OwnerLogin']);
   Route::post('collector', [Login::class, 'CollectorLogin']);
   Route::post('member', [Login::class, 'MemberLogin']);
-  // Route::post('reciept', [Login::class, 'recieptInfo']);
 });
 
 Route::post('/request_registration', [RequestRegistration::class, 'index']);

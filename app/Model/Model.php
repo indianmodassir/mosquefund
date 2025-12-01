@@ -142,6 +142,18 @@ class Model implements \IteratorAggregate
     }
   }
 
+  public function truncate()
+  {
+    try {
+      $table = $this->table;
+      $stmt = $this->conn->prepare("TRUNCATE TABLE `{$table}`");
+      $stmt->execute();
+      return true;
+    } catch(\Exception $err) {
+      die('Internal Database Error');
+    }
+  }
+
   public function toArray()
   {
     return $this->collection;

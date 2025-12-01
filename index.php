@@ -139,7 +139,8 @@ footer i{ font-size: 22px;}
     padding-top: 44px;
     text-align: center;
   ">Overall Collection Details / समग्र संग्रह राशि का विवरण</strong>
-  <form>
+  <form action="/fetch_expense" onsubmit="submitLoginForm(event)">
+    <input type="hidden" name="csrf" value="<?=@csrf;?>" autocomplete="off">
     <div style="
       display:flex;
       align-items:center;
@@ -161,7 +162,7 @@ footer i{ font-size: 22px;}
         padding: 0 11px 0 43px;
         height: 42px;
       ">
-      <button type="button" style="
+      <button style="
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
         padding: 0 18px;
@@ -169,6 +170,7 @@ footer i{ font-size: 22px;}
         white-space:nowrap;
         width: fit-content;
       ">Get Details</button>
+      <div class="error b_error" style="position:absolute;bottom:-20px;left:0;"></div>
     </div>
   </form>
   <br/><br/><br/><br/>

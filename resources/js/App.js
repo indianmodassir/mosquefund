@@ -92,6 +92,7 @@ function submitLoginForm(e) {
   const form = e.target;
   $('input').removeClass('error').nextAll('.error').html('');
   $(':submit').attr('disabled', true);
+  $('.b_error').html('');
 
   post(form.action, {data}).then((res) => {
     // Handle Mailing status
@@ -102,6 +103,7 @@ function submitLoginForm(e) {
     } else if (res.error || res.selector === '.status') {
       !res.selector && alert(res.message);
       $(res.selector).addClass('error').focus().nextAll('.error').html(res.message);
+      if (res.selector === '#search') $('.b_error').html(res.message);
       
       // Reset password input
       if (res.reset) {
@@ -112,6 +114,7 @@ function submitLoginForm(e) {
     // Loads Response Template
     } else if (res.body) {
       $('.response').html(res.body);
+      if (res.popup) ($('#search').val(''), showModal());
       !res.notCaptcha && generateCaptcha();
     } else if (res.download) {
       res.success = async (image, width, height, FRN) => {

@@ -642,7 +642,7 @@ form:has(.vtable) {
   background: #fff;
   border-radius: 8px;
   display: flex;
-  padding: 22px;
+  padding: 22px 18px;
   color: #22458a;
   flex-direction: column;
   align-items: center;
@@ -690,7 +690,7 @@ form:has(.vtable) {
   .middle-wrap {
     row-gap: 22px;
   }
-  .box {
+  .login .box {
     transform: scale(.8);
   }
   .mosque-logo {
@@ -881,9 +881,9 @@ form:has(.vtable) {
     flex-direction: column;
     justify-content: center;
   }
-  .b_success h1 {
-    width: 100px;
-    height: 100px;
+  .b_success svg {
+    width: 80px;
+    height: 80px;
   }
 }
 @media only screen and (max-width: 478px) {
@@ -908,5 +908,19 @@ form:has(.vtable) {
   }
   .box img {
     width: 130px;
+  }
+}
+@media only screen and (max-width: 440px) {
+  .btn-wrap {
+    flex-direction: column;
+  }
+  .btn-wrap button {
+    width: 100% !important;
+    font-size: 14px !important;
+  }
+  .fgroup {
+    flex-direction: column;
+    row-gap: 18px;
+    text-align: center;
   }
 }

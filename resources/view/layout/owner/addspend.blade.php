@@ -3,6 +3,19 @@
   <h3>Secretary Spent Amount Management Form / सचिव व्यय राशि प्रबंधन प्रपत्र</h3>
 </div>
 <div class="wrap bg">
+  <div class="shaded">समग्र एकत्रित निधि का विवरण / Overall Collected fund Details</div>
+  <form>
+    <div class="group">
+      <div class="field">
+        <div style="font-size:14px;">Overall Collected Balance / कुल जमा राशि: ₹{{$overall_collection}}</div>
+      </div>
+      <div class="field">
+        <div style="font-size:14px;">Last Collected Balance / अंतिम जमा राशि: ₹{{$collected}}</div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="wrap bg">
   <div class="shaded">सचिव द्वारा खर्च की गई राशि का विवरण / Details of Secretary spent Amount</div>
   <form>
     <div class="p-status">

@@ -1,6 +1,6 @@
 @php
 function get(string $key, $vars) {
-  return $vars[$key] ?? '';
+  return $vars[$key] ?? null;
 }
 @endphp
 <div class="notice" style="margin-top:0;padding-top:33px;">
@@ -11,7 +11,7 @@ function get(string $key, $vars) {
 <div class="wrap bg">
   <div class="shaded">आवेदक का विवरण / Details of Applicant</div>
   <form>
-    <input type="hidden" name="csrf" value="{{$csrf}}" autocomplete="off">
+    <input type="hidden" name="csrf" value="{{get('csrf', $vars) ?? $csrf}}" autocomplete="off">
     <div class="p-status">
       <div class="status"></div>
     </div>

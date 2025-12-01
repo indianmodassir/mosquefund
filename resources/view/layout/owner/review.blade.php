@@ -1,8 +1,4 @@
-<style>
-  tr td:first-child {
-    max-width: fit-content;
-  }
-</style>
+<style>tr td:first-child {max-width: fit-content}</style>
 <div class="wrap bg" style="padding:11px;background:#fbfbfb;">
   <table class="f-review">
     <tr>
@@ -56,7 +52,7 @@
 </div>
 <div class="wrap bg" style="background:#fbfbfb;">
   <form action="/member/registration" method="post" onsubmit="registration(event)" style="padding:0;">
-    <div class="field" style="padding:12px 22px;flex-direction:row;justify-content:flex-end;max-width:100%;column-gap:6px;">
+    <div class="field btn-wrap" style="padding:12px 22px;flex-direction:row;justify-content:flex-end;max-width:100%;column-gap:6px;">
       <button style="width:max-content;padding:0 14px;display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;">
         <svg class="preloader" viewBox="0 0 19 19" fill="none"><path d="M9.5 2.9375V5.5625M9.5 13.4375V16.0625M2.9375 9.5H5.5625M13.4375 9.5H16.0625" stroke="currentColor" stroke-width="1.875" stroke-linecap="square"></path><path d="M4.86011 4.85961L6.71627 6.71577M12.2847 12.2842L14.1409 14.1404M4.86011 14.1404L6.71627 12.2842M12.2847 6.71577L14.1409 4.85961" stroke="currentColor" stroke-width="1.875" stroke-linecap="square"></path></svg>
         <span>FINALIZE</span>

@@ -16,6 +16,15 @@ class Validation
     ]));
   }
 
+  public function checkRequest(array $keys)
+  {
+    $request = $this->all();
+    foreach($keys as $key) {
+      if (!isset($request[$key])) $this->export('Bad Request');
+      return $request;
+    }
+  }
+
   private function csrf(string $value, $selector, $field)
   {
     $session = \session();
