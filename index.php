@@ -167,9 +167,15 @@ footer i{ font-size: 22px;}
         border-bottom-left-radius: 0px;
         padding: 0 18px;
         height: 42px;
+        display: flex;
+        column-gap: 6px;;
+        align-items:center;
+        justify-content: center;
         white-space:nowrap;
         width: fit-content;
-      ">Get Details</button>
+      ">
+      <img class="preloader" src="/resources/assets/loader.gif" alt="Loader"/>
+      <i class="fa fa-floppy-o"></i><span>Get Details</span></button>
       <div class="error b_error" style="position:absolute;bottom:-20px;left:0;"></div>
     </div>
   </form>

@@ -66,34 +66,7 @@
           <tr>
             <td class="theader center" colspan="8">Dues Payment Details / बकाया राशि का विवरण</td>
           </tr>
-          <tr style="background:#eef1f5;">
-            <th style="white-space:nowrap;">क्र० स०</th>
-            <th><span class="en-label">Month From / </span>महीने से</th>
-            <th><span class="en-label">Month To / </span>महीने तक</th>
-            <th><span class="en-label">Dues / </span>बकाया</th>
-            <th><span class="en-label">Payment Date / </span>भुगतान तिथि</th>
-            <th style="width:0;white-space:nowrap;"><span class="en-label">Total / </span>कुल</th>
-            <th style="width:0;white-space:nowrap;"><span class="en-label">Status / </span>स्थिति</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>{{$member->last_paid_to}}</td>
-            <td>{{$nextDate->format('d F Y')}}</td>
-            <td>{{$accurate_due_month}} महीना</td>
-            <td>{{$nextDate->format('d-m-Y h:i:s A')}}</td>
-            <td>₹{{$dues}}</td>
-            <td><span class="waiting">Waiting</span></td>
-          </tr>
-        @else if(!$authorized)
-          <tr>
-            <td colspan="7" style="text-align:center;white-space:initial;"><span>प्रिय {{$member->fullname}}, आपका इस महीने का कोई बकाया राशि नहीं है। आपने इस महीने का ₹{{$last_payment['paid_amount']}} का भुगतान कर दिया है।</span></td>
-          </tr>
-        @endif
-        <tbody>
-          @if ($authorized)
-            <tr>
-              <td class="theader center" colspan="7">Dues Payment Details / बकाया राशि का विवरण</td>
-            </tr>
+          <tbody style="width:100%;overflow:auto;">
             <tr style="background:#eef1f5;">
               <th style="white-space:nowrap;">क्र० स०</th>
               <th><span class="en-label">Month From / </span>महीने से</th>
@@ -106,23 +79,54 @@
             <tr>
               <td>1</td>
               <td>{{$member->last_paid_to}}</td>
-              <td>
-                <select name="due-month" id="dueMonth">
-                  @for($i = 1; $i <= $dueMonth; $i++)
-                    @php
-                      $attr = $i === $dueMonth ? 'selected' : '';
-                      $dateModifier = new \DateTime($member->last_date);
-                      $dateModifier->modify(\sprintf('+%s month', $i));
-                    @endphp
-                    <option value="{{$i}}" data-date="{{$dateModifier->format('d-m-Y h:i:s A')}}" {{$attr}}>{{$dateModifier->format('d F Y')}}</option>
-                  @endfor
-                </select>
-              </td>
-              <td id="total_dues_months">{{$accurate_due_month}} महीना</td>
-              <td id="datePreview">{{$nextDate->format('d-m-Y h:i:s A')}}</td>
-              <td style="white-space:nowrap;">₹<input type="number" name="due-fee" id="duesFee" value="{{$dues}}"></td>
-              <td><span class="waiting">Holding</span></td>
+              <td>{{$nextDate->format('d F Y')}}</td>
+              <td>{{$accurate_due_month}} महीना</td>
+              <td>{{$nextDate->format('d-m-Y h:i:s A')}}</td>
+              <td>₹{{$dues}}</td>
+              <td><span class="waiting">Waiting</span></td>
             </tr>
+          </tbody>
+        @else if(!$authorized)
+          <tr>
+            <td colspan="7" style="text-align:center;white-space:initial;"><span>प्रिय {{$member->fullname}}, आपका इस महीने का कोई बकाया राशि नहीं है। आपने इस महीने का ₹{{$last_payment['paid_amount']}} का भुगतान कर दिया है।</span></td>
+          </tr>
+        @endif
+        <tbody>
+          @if ($authorized)
+            <tr>
+              <td class="theader center" colspan="7">Dues Payment Details / बकाया राशि का विवरण</td>
+            </tr>
+            <tbody style="width:100%;overflow:auto;">
+              <tr style="background:#eef1f5;">
+                <th style="white-space:nowrap;">क्र० स०</th>
+                <th><span class="en-label">Month From / </span>महीने से</th>
+                <th><span class="en-label">Month To / </span>महीने तक</th>
+                <th><span class="en-label">Dues / </span>बकाया</th>
+                <th><span class="en-label">Payment Date / </span>भुगतान तिथि</th>
+                <th style="width:0;white-space:nowrap;"><span class="en-label">Total / </span>कुल</th>
+                <th style="width:0;white-space:nowrap;"><span class="en-label">Status / </span>स्थिति</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>{{$member->last_paid_to}}</td>
+                <td>
+                  <select name="due-month" id="dueMonth">
+                    @for($i = 1; $i <= $dueMonth; $i++)
+                      @php
+                        $attr = $i === $dueMonth ? 'selected' : '';
+                        $dateModifier = new \DateTime($member->last_date);
+                        $dateModifier->modify(\sprintf('+%s month', $i));
+                      @endphp
+                      <option value="{{$i}}" data-date="{{$dateModifier->format('d-m-Y h:i:s A')}}" {{$attr}}>{{$dateModifier->format('d F Y')}}</option>
+                    @endfor
+                  </select>
+                </td>
+                <td id="total_dues_months">{{$accurate_due_month}} महीना</td>
+                <td id="datePreview">{{$nextDate->format('d-m-Y h:i:s A')}}</td>
+                <td style="white-space:nowrap;">₹<input type="number" name="due-fee" id="duesFee" value="{{$dues}}"></td>
+                <td><span class="waiting">Holding</span></td>
+              </tr>
+            </tbody>
             <tr>
               <td class="nowrap" colspan="7">
                 <p>*NOTE:</p>
@@ -152,10 +156,19 @@
           <td colspan="7">
             <div class="flex-box">
               @if ($authorized)
-                <button type="button" id="btnPaid" onclick="openConfirmationPopup(this)">PAID NOW</button>
+                <button type="button" id="btnPaid" onclick="openConfirmationPopup(this)">
+                  <i class="fa fa-credit-card"></i>
+                  &nbsp;PAID NOW
+                </button>
               @endif
-              <button type="button" data-action="/collector/all" id="btnSearch" data-csrf="{{csrf}}" data-login="member" style="color:#fff;" onclick="{{$searchFn}}(this);$('#btn_search').attr('data-uid', '');">SEARCH AGAIN</button>
-              <button type="button" style="color:#fff;" id="btnPrint" onclick="Print('form', true)">PRINT</button>
+              <button type="button" data-action="/collector/all" id="btnSearch" data-csrf="{{csrf}}" data-login="member" style="color:#fff;" onclick="{{$searchFn}}(this);$('#btn_search').attr('data-uid', '');">
+                <i class="fa fa-search"></i>
+                SEARCH AGAIN
+              </button>
+              <button type="button" style="color:#fff;" id="btnPrint" onclick="Print('form', true)">
+                <i class="fa fa-print"></i>
+                &nbsp;PRINT
+              </button>
             </div>
           </td>
         </tr>

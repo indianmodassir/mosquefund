@@ -112,10 +112,15 @@
         <p>Powered By — IndianModassir</p>
       </p>
     </div>
-    <div class="field" style="padding:12px 22px;flex-direction:row;justify-content:flex-end;max-width:100%;">
+    <div class="field" style="padding:12px 22px;flex-direction:row;justify-content:flex-end;max-width:100%;column-gap:8px;">
       <button style="padding:0 12px;width:max-content;display:flex;justify-content:center;align-items:center;column-gap:5px;">
-        <svg class="preloader" viewBox="0 0 19 19" fill="none" style=""><path d="M9.5 2.9375V5.5625M9.5 13.4375V16.0625M2.9375 9.5H5.5625M13.4375 9.5H16.0625" stroke="currentColor" stroke-width="1.875" stroke-linecap="square" style=""></path><path d="M4.86011 4.85961L6.71627 6.71577M12.2847 12.2842L14.1409 14.1404M4.86011 14.1404L6.71627 12.2842M12.2847 6.71577L14.1409 4.85961" stroke="currentColor" stroke-width="1.875" stroke-linecap="square" style=""></path></svg>
-        <span>ADD MEMBER</span>
+        <img class="preloader" src="/resources/assets/loader.gif" draggable="false" alt="loader" width="17px">
+        <i class="fa fa-floppy-o"></i>
+        <span>&nbsp;ADD MEMBER</span>
+      </button>
+      <button type="reset" style="padding:0 12px;width:max-content;display:flex;justify-content:center;align-items:center;column-gap:5px;background:#3c8dbc;">
+        <i class="fa fa-refresh"></i>
+        <span>Reset</span>
       </button>
     </div>
   </form>

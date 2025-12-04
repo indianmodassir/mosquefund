@@ -110,9 +110,13 @@ function showDialog(logo, label, btnText, handler, uid) {
             <img src="resources/assets/${logo}.png" alt="${logo}" style="max-width:130px;"/>
             <h2 style="margin-bottom:11px;color:#515966;text-align:center;">${label}</h2>
             <div class="group" style="justify-content:center;">
-              <button type="button" id="btnSearch" onclick="closeModel()" style="font-size:14px;">CANCEL</button>
+              <button type="button" id="btnSearch" onclick="closeModel()" style="font-size:14px;">
+                <i class="fa fa-times-circle"></i>
+                &nbsp;CANCEL
+              </button>
               <button type="button" style="color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;column-gap:6px;" id="btnPrint" onclick="${handler}('${uid}', this)">
                 <img src="/resources/assets/loader.gif" alt="Loader" style="display:none;"/>
+                <i class="fa fa-floppy-o"></i>
                 <span>${btnText}</span>
               </button>
             </div>

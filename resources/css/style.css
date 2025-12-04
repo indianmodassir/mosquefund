@@ -28,6 +28,12 @@ a:hover {
 nav, .header-text {
   display: flex;
 }
+.fa-location-arrow {
+  font-size: 15px;
+}
+button:disabled i {
+  display: none;
+}
 nav {
   align-items: center;
   padding: 0 4%;
@@ -135,32 +141,20 @@ dialog#popupUI .response {
 }
 dialog#popupUI .loader {
   position: fixed;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   left: 50%;
   top: 50%;
   display: none;
   transform: translate(-50%, -50%);
 }
-dialog#popupUI .loader svg, .preloader {
-  height: 100%;
-  width: 100%;
-  color: #7070e7;
-  display: block;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(1turn);
-  }
+dialog#popupUI .loader i.ploading {
+  color: #007bff!important;
+  display: inline-block;
 }
 dialog#popupUI .response:empty + .loader {
   display: block;
 }
-
 #content {
   border-radius: 8px;
   max-width: 800px;
@@ -364,17 +358,14 @@ div.status.success {
 button:disabled {
   cursor: default!important;
 }
-button svg.preloader {
-  color: inherit;
-  width: 22px;
-  height: 22px;
+button img.preloader {
   display: none;
 }
-button:disabled svg {
-  display: none;
-}
-button:disabled svg.preloader {
+button:disabled img.preloader {
   display: block;
+}
+button:disabled img.preloader + i {
+  display: none;
 }
 .preloader-wrap, .background {
   position: fixed;
@@ -398,7 +389,7 @@ button:disabled svg.preloader {
 }
 .preloader-wrap .preloader {
   position: relative;
-  color: #fff;
+  color: #007bff!important;
   z-index: 11111;
 }
 #xcontent {
@@ -515,11 +506,11 @@ form:has(.vtable) {
 .vtable td :is(select, input) {
   font-size: 13px;
 }
-#btnPrint {
+#btnPrint, #BtnManager {
   background: #7070fc;
   border-color: #375dc5;
 }
-#btnPrint:hover {
+#btnPrint:hover, #BtnManager:hover {
   background: #6464e4;
 }
 #btnSearch {
@@ -801,7 +792,7 @@ form:has(.vtable) {
   form table:not(.tracker) :is(td, th) {
     padding: 6px !important;
   }
-  #btnSearch, #btnPrint, #btnPaid {
+  #btnSearch, #btnPrint, #btnPaid, #BtnManager {
     font-weight: 600;
     font-size: 12px !important;
     height: 35px !important;

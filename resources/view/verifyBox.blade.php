@@ -40,9 +40,13 @@
       <button class="trp-btn" onclick="validateOTP()" id="validate">Validate</button>
       <button class="trp-btn" id="resend" onclick="sendRequest(true)" style="display:flex;align-items:center;column-gap:6px;">
         <img src="/resources/assets/loader.gif" alt="Loader" style="display:none;"/>
-        Resend OTP
+        <i class="fa fa-arrow-rotate-right"></i>
+        <span>Resend OTP</span>
       </button>
-      <button class="trp-btn" onclick="closeModel()">Close</button>
+      <button class="trp-btn" onclick="closeModel()" style="display:flex;justify-content:center;align-items:center;column-gap:5px;">
+        <i class="fa fa-times-circle"></i>
+        <span>Close</span>
+      </button>
     </div>
   </div>
 </div>
@@ -58,7 +62,7 @@
       if (res.error) {
         $(res.selector).addClass('error').focus().nextAll('.error').html(res.message);
       } else if (res.success) {
-        alert('Verified Success!');
+        alert('Verified.');
         closeModel();
       }
       $('#validate').attr('disabled', null);

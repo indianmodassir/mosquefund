@@ -2,6 +2,7 @@ function manageOwner(uid)
 {
   showLoader();
   const data = {disabled: $('#accountDisabled')[0].checked, uid};
+  $('#BtnManager').attr('disabled', true);
   post('/admin/enabled_disable', {data}).then(res => {
     if (res.success) {
       sendOptRequest({url: '/admin/manage'});
@@ -10,10 +11,12 @@ function manageOwner(uid)
     } else {
       $('.response #content form').html(res);
     }
+    $('#BtnManager').attr('disabled', null);
     hideLoader();
   }).catch(_err => {
     hideLoader();
     alert('Internal Server Error!');
+    $('#BtnManager').attr('disabled', null);
   });
 }
 
@@ -41,9 +44,13 @@ function ManagePopup(disabled, uid)
               <div class="switch"></div>
             </label>
             <div class="group" style="justify-content:center;">
-              <button type="button" id="btnSearch" onclick="closeModel()" style="font-size:12px;height:33px;">CANCEL</button>
-              <button type="button" style="color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;column-gap:6px;height:33px;" id="btnPrint" onclick="manageOwner(${uid})">
-                <img src="/resources/assets/loader.gif" alt="Loader" style="display:none;"/>
+              <button type="button" id="btnSearch" onclick="closeModel()" style="font-size:12px;height:33px;">
+                <i class="fa fa-times-circle"></i>
+                &nbsp;CANCEL
+              </button>
+              <button type="button" style="color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;column-gap:6px;height:33px;" id="BtnManager" onclick="manageOwner(${uid})">
+                <img class="preloader" src="/resources/assets/loader.gif" alt="Loader"/>
+                <i class="fa fa-floppy-o"></i>
                 <span>SUBMIT</span>
               </button>
             </div>

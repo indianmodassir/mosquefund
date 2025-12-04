@@ -117,7 +117,7 @@ function submitLoginForm(e) {
       if (res.popup) ($('#search').val(''), showModal());
       !res.notCaptcha && generateCaptcha();
     } else if (res.download) {
-      res.success = async (image, width, height, FRN) => {
+      Reciept(res).then(async ({image, width, height, FRN}) => {
         if (res.preview) {
           $('.response').html(res.html);
           $('#reciept_preview').attr('src', image);
@@ -146,8 +146,7 @@ function submitLoginForm(e) {
           link.click();
           $(':submit').attr('disabled', null);
         }
-      };
-      Reciept(res);
+      });
     } else {
       window.location.reload();
     }

@@ -31,17 +31,12 @@
       </div>
       <div class="field" style="column-gap: 0px; width: auto; min-width: 120px;">
         <button style="max-width:max-content;width:max-content;padding:0 11px;display:flex;justify-content:center;align-items:center;column-gap:5px;" type="button" id="otpSender" onclick="sendOTP('/resendotp')"
-          style="display: flex; align-items: center; justify-content: center; column-gap: 6px;">
-          <svg class="preloader" viewBox="0 0 19 19" fill="none">
-            <path d="M9.5 2.9375V5.5625M9.5 13.4375V16.0625M2.9375 9.5H5.5625M13.4375 9.5H16.0625" stroke="currentColor"
-              stroke-width="1.875" stroke-linecap="square"></path>
-            <path
-              d="M4.86011 4.85961L6.71627 6.71577M12.2847 12.2842L14.1409 14.1404M4.86011 14.1404L6.71627 12.2842M12.2847 6.71577L14.1409 4.85961"
-              stroke="currentColor" stroke-width="1.875" stroke-linecap="square"></path>
-          </svg>
+          style="display: flex; align-items: center; justify-content: center; column-gap: 6px;width: fit-content;padding: 0 15px;max-width: inherit;">
+          <img class="preloader" src="/resources/assets/loader.gif" alt="Loader"/>
+          <i class="fa fa-arrow-rotate-right"></i>
           <span>RESEND OTP</span>
         </button>
-        <div class="status"></div>
+        <div class="status" style="font-size:13px;margin-top:2px;"></div>
       </div>
     </div><br/>
     <div class="label" style="text-align:start;">
@@ -68,14 +63,15 @@
     <div class="field"
       style="padding:12px 22px;flex-direction:row;justify-content:flex-end;max-width:100%;column-gap:6px;">
       <button style="width:max-content;padding:0 14px;display:flex;justify-content:center;align-items:center;column-gap:5px;">
-        <svg class="preloader" viewBox="0 0 19 19" fill="none"><path d="M9.5 2.9375V5.5625M9.5 13.4375V16.0625M2.9375 9.5H5.5625M13.4375 9.5H16.0625" stroke="currentColor" stroke-width="1.875" stroke-linecap="square"></path><path d="M4.86011 4.85961L6.71627 6.71577M12.2847 12.2842L14.1409 14.1404M4.86011 14.1404L6.71627 12.2842M12.2847 6.71577L14.1409 4.85961" stroke="currentColor" stroke-width="1.875" stroke-linecap="square"></path></svg>
-        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="currentColor" style="transform:rotateY(180deg)">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.3572 3.23397C3.66645 2.97447 4.1014 2.92638 4.45988 3.11204L20.7851 11.567C21.1426 11.7522 21.3542 12.1337 21.322 12.5351C21.2898 12.9364 21.02 13.2793 20.6375 13.405L13.7827 15.6586L10.373 22.0179C10.1828 22.3728 9.79826 22.5789 9.39743 22.541C8.9966 22.503 8.65762 22.2284 8.53735 21.8441L3.04564 4.29872C2.92505 3.91345 3.04794 3.49346 3.3572 3.23397ZM5.67123 5.99173L9.73507 18.9752L12.2091 14.361C12.3304 14.1347 12.5341 13.9637 12.7781 13.8835L17.7518 12.2484L5.67123 5.99173Z" fill="currentColor"/>
-        </svg>
+        <img class="preloader" src="/resources/assets/loader.gif" alt="Loader"/>
+        <i class="fa fa-location-arrow"></i>
         <span>VERIFY OTP</span>
       </button>
       <button data-action="/admin/dashboard" onclick="sendOptRequest(this)" type="button"
-        style="width:max-content;background:#e54a4a;padding:0 14px;">CLOSE</button>
+        style="width:max-content;background:#e54a4a;padding:0 14px;">
+        <i class="fa fa-times-circle"></i>
+        <span>&nbsp;CLOSE</span>
+      </button>
     </div>
   </form>
 <script>

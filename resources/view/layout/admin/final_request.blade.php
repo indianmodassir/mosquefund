@@ -46,9 +46,7 @@
     align-items: center;
     column-gap: 6px;
   ">
-    <svg width="18px" height="18px" viewBox="0 0 24 24" fill="currentColor" style="transform: rotateY(180deg);">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M3.3572 3.23397C3.66645 2.97447 4.1014 2.92638 4.45988 3.11204L20.7851 11.567C21.1426 11.7522 21.3542 12.1337 21.322 12.5351C21.2898 12.9364 21.02 13.2793 20.6375 13.405L13.7827 15.6586L10.373 22.0179C10.1828 22.3728 9.79826 22.5789 9.39743 22.541C8.9966 22.503 8.65762 22.2284 8.53735 21.8441L3.04564 4.29872C2.92505 3.91345 3.04794 3.49346 3.3572 3.23397ZM5.67123 5.99173L9.73507 18.9752L12.2091 14.361C12.3304 14.1347 12.5341 13.9637 12.7781 13.8835L17.7518 12.2484L5.67123 5.99173Z" fill="currentColor" style=""></path>
-    </svg>
+    <i class="fa fa-location-arrow"></i>
     <span>Get Details</span>
   </button>
 </div>
@@ -189,10 +187,8 @@
                       justify-content: center;
                       align-items: center;
                       column-gap: 6px;">
-                      <svg class="preloader" viewBox="0 0 19 19" fill="none" style=""><path d="M9.5 2.9375V5.5625M9.5 13.4375V16.0625M2.9375 9.5H5.5625M13.4375 9.5H16.0625" stroke="currentColor" stroke-width="1.875" stroke-linecap="square" style=""></path><path d="M4.86011 4.85961L6.71627 6.71577M12.2847 12.2842L14.1409 14.1404M4.86011 14.1404L6.71627 12.2842M12.2847 6.71577L14.1409 4.85961" stroke="currentColor" stroke-width="1.875" stroke-linecap="square" style=""></path></svg>
-                      <svg width="18px" height="18px" viewBox="0 0 24 24" fill="currentColor" style="transform: rotateY(180deg);">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.3572 3.23397C3.66645 2.97447 4.1014 2.92638 4.45988 3.11204L20.7851 11.567C21.1426 11.7522 21.3542 12.1337 21.322 12.5351C21.2898 12.9364 21.02 13.2793 20.6375 13.405L13.7827 15.6586L10.373 22.0179C10.1828 22.3728 9.79826 22.5789 9.39743 22.541C8.9966 22.503 8.65762 22.2284 8.53735 21.8441L3.04564 4.29872C2.92505 3.91345 3.04794 3.49346 3.3572 3.23397ZM5.67123 5.99173L9.73507 18.9752L12.2091 14.361C12.3304 14.1347 12.5341 13.9637 12.7781 13.8835L17.7518 12.2484L5.67123 5.99173Z" fill="currentColor"></path>
-                      </svg>
+                      <img src="/resources/assets/loader.gif" alt="Loader" style="display:none;"/>
+                      <i class="fa fa-location-arrow"></i>
                       <span>Update Final Status</span>
                     </button>
                   </div>

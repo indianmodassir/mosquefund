@@ -7,6 +7,8 @@
   <meta name="theme-color" content="#0171E0"/>
   <title>Secretary Registration</title>
   <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/resources/css/font-awesome.min.css">
   <link rel="stylesheet" href="resources/css/style.css">
   <link rel="stylesheet" href="resources/css/admin.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vkbd@1.0.1/lib/vkbd.min.css">
@@ -26,7 +28,7 @@
   <dialog id="popupUI">
     <div class="response"></div>
     <div class="loader">
-      <svg viewBox="0 0 19 19" fill="none" class="motion-safe:animate-spin icon-lg"><path d="M9.5 2.9375V5.5625M9.5 13.4375V16.0625M2.9375 9.5H5.5625M13.4375 9.5H16.0625" stroke="currentColor" stroke-width="1.875" stroke-linecap="square"></path><path d="M4.86011 4.85961L6.71627 6.71577M12.2847 12.2842L14.1409 14.1404M4.86011 14.1404L6.71627 12.2842M12.2847 6.71577L14.1409 4.85961" stroke="currentColor" stroke-width="1.875" stroke-linecap="square"></path></svg>
+      <i class="fa fa-spinner fa-spin fa-5x ploading"></i>
     </div>
   </dialog>
   <div id="xcontent">

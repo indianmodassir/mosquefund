@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Track Registration Status</title>
   <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/resources/css/font-awesome.min.css">
   <link rel="stylesheet" href="/resources/css/style.css">
   <link rel="stylesheet" href="/resources/css/status.css">
   <script src="/resources/js/jquery.js"></script>

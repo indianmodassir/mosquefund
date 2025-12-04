@@ -80,7 +80,7 @@ class GeneratePDF
     ];
 
     if ($response_type) {
-      $recieptInfo['html'] = '<div id="content" style="margin:33px auto;max-width:1120px;"><div class="header"><button type="button" class="close" onclick="closeModel()"><span aria-hidden="true">×</span></button><h4>RECIEPT DETAILS</h4></div><div class="form-container" style="background:#eee;padding:33px;text-align:center;"><img id="reciept_preview" alt="Reciept Preview" draggable="false" style="width:100%;max-width:700px;"></div></div>';
+      $recieptInfo['html'] = '<div id="content" style="margin:33px auto;max-width:1120px;"><div class="header"><button type="button" class="close" onclick="closeModel()"><span aria-hidden="true">×</span></button><h4>RECIEPT DETAILS</h4></div><div class="form-container" style="background:#eee;padding:33px;text-align:center;"><img id="reciept_preview" alt="Reciept Preview" draggable="false" style="width:100%;max-width:980px;"></div></div>';
     }
 
     die(\json_encode($recieptInfo));

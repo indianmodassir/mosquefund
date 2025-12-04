@@ -67,6 +67,7 @@ class Validation
    */
   private function scalar(string $value, $selector, $field)
   {
+    $value = trim($value);
     $pattern = '/^(?:([a-z\x{0900}-\x{097F}]+)(\s[a-z\x{0900}-\x{097F}])?)+$/ui';
     $length = strlen($value);
     if (($length < 4 || $length > 80) || !preg_match($pattern, $value)) {
@@ -81,6 +82,7 @@ class Validation
    */
   private function username(string $value, $selector, $field)
   {
+    $value = trim($value);
     $pattern = '/^(?:(?:([a-z\x{0900}-\x{097F}]+)(\d+)?)(\s[a-z\x{0900}-\x{097F}])?)+$/ui';
     $length = strlen($value);
     if (($length < 3 || $length > 80) || !preg_match($pattern, $value)) {
