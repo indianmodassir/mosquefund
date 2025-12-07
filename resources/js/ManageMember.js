@@ -73,7 +73,7 @@ function openConfirmationPopup()
     return $('#declaration').focus().nextAll('.error').html('Accept Terms & Conditions');
   }
 
-  showDialog('payment', 'Are You Sure Confirm Payment', 'YES CONFIRM', 'confirmPayment', data);
+  showDialog('payment', 'Are You Sure Confirm Payment', 'YES CONFIRM', 'fa-check', 'confirmPayment', data);
 }
 
 function confirmDeleteMember(uid, button)
@@ -98,10 +98,10 @@ function deleteMember(elem)
 {
   const uid = elem.dataset['uid'];
   showModal();
-  showDialog('delete_member', 'Are You Sure Delete Member', 'YES DELETE', 'confirmDeleteMember', uid);
+  showDialog('delete_member', 'Are You Sure Delete Member', 'YES DELETE', 'fa-trash', 'confirmDeleteMember', uid);
 }
 
-function showDialog(logo, label, btnText, handler, uid) {
+function showDialog(logo, label, btnText, icon, handler, uid) {
   $('.response').html(
     `<div id="content" style="max-width:510px;">
       <div class="form-container">
@@ -116,7 +116,7 @@ function showDialog(logo, label, btnText, handler, uid) {
               </button>
               <button type="button" style="color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;column-gap:6px;" id="btnPrint" onclick="${handler}('${uid}', this)">
                 <img src="/resources/assets/loader.gif" alt="Loader" style="display:none;"/>
-                <i class="fa fa-floppy-o"></i>
+                <i class="fa ${icon}"></i>
                 <span>${btnText}</span>
               </button>
             </div>

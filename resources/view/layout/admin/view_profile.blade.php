@@ -1,6 +1,6 @@
 <strong style="text-align:center;margin-bottom:22px;display:block;">Profile Details / प्रोफ़ाइल विवरण</strong>
 <form>
-  <table class="vtable fixed" style="table-layout:initial;">
+  <table class="vtable fixed tracker" style="table-layout:initial;">
     <tr>
       <th style="width:0;white-space:nowrap;">Administrator Name:</th>
       <td>{{$fullname}}</td>
@@ -8,6 +8,10 @@
     <tr>
       <th style="width:0;white-space:nowrap;">Administrator Email:</th>
       <td>{{$email}}</td>
+    </tr>
+    <tr>
+      <th>Role:</th>
+      <td>Administrator / प्रशासक</td>
     </tr>
   </table>
 </form>

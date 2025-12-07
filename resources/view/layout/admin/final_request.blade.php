@@ -187,7 +187,7 @@
                       justify-content: center;
                       align-items: center;
                       column-gap: 6px;">
-                      <img src="/resources/assets/loader.gif" alt="Loader" style="display:none;"/>
+                      <img class="preloader" src="/resources/assets/loader.gif" alt="Loader"/>
                       <i class="fa fa-location-arrow"></i>
                       <span>Update Final Status</span>
                     </button>

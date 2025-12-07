@@ -178,7 +178,7 @@ Reciept.prototype = {
       ctx.font = '20px sans-serif';
       ctx.fillText('किसी प्रकार की समस्या के लिए संपर्क करें Secretary Mobile No / सचिव मोबाइल नं. +91 ' + this.contact, 90, 900);
 
-      this.finalize(resolve, reject, canvas, RCPT_WIDTH, RCPT_HEIGHT, this.frn);
+      this.finalize(resolve, reject, canvas, RCPT_WIDTH, RCPT_HEIGHT, this.frn.slice(16));
     };
   },
 

@@ -1,6 +1,6 @@
 <strong style="text-align:center;margin-bottom:22px;display:block;">Profile Details / प्रोफ़ाइल विवरण</strong>
 <form style="overflow:auto;">
-  <table class="vtable fixed" style="table-layout:initial;">
+  <table class="vtable fixed tracker" style="table-layout:initial;">
     <tr>
       <th>Applicant Name:</th>
       <td>{{$fullname}}</td>
@@ -28,6 +28,10 @@
     <tr>
       <th>Address:</th>
       <td>{{$address}}</td>
+    </tr>
+    <tr>
+      <th>Applicant Role:</th>
+      <td>Secretary / सचिव</td>
     </tr>
   </table>
 </form>

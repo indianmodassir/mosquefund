@@ -179,7 +179,7 @@ class Member extends Form
         '.self::UserIcon().'
         <div class="error"></div>
       </div>',
-      '<i class="fa fa-location-arrow" style="font-size:15px;"></i>
+      '<i class="fa fa-floppy-o" style="font-size:15px;"></i>
       <span>GET DETAILS</span>'
     );
   }

@@ -115,7 +115,7 @@
     <div class="field" style="padding:12px 22px;flex-direction:row;justify-content:flex-end;max-width:100%;column-gap:8px;">
       <button style="padding:0 12px;width:max-content;display:flex;justify-content:center;align-items:center;column-gap:5px;">
         <img class="preloader" src="/resources/assets/loader.gif" draggable="false" alt="loader" width="17px">
-        <i class="fa fa-floppy-o"></i>
+        <i class="fa fa-plus"></i>
         <span>&nbsp;ADD MEMBER</span>
       </button>
       <button type="reset" style="padding:0 12px;width:max-content;display:flex;justify-content:center;align-items:center;column-gap:5px;background:#3c8dbc;">
