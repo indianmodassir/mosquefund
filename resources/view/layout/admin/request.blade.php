@@ -63,7 +63,7 @@
 @if ($isForwarded)
 <div style="overflow-y:hidden;">
   <table class="vtable" style="table-layout:initial;min-width:834px;">
-    <tr>
+    <tr style="background:#e9eef1;">
       <th style="white-space:nowrap;width:0;">क्र० स०</th>
       <th>आवेदक का नाम</th>
       <th>आवेदक का मोबाइल</th>

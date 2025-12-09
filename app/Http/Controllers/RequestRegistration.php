@@ -229,7 +229,7 @@ class RequestRegistration extends MailSender
   {
     $random = rand(1111111,9999999);
     $year = date('Y');
-    $uid = \sprintf('MFCSR/%s/%s', $year, $random);
+    $uid = \sprintf('REF%s%s', $year, $random);
     $data = RequestModal::select('reqid', $uid);
     if ($data) {
       return $this->generateRequestID();
@@ -312,6 +312,7 @@ class RequestRegistration extends MailSender
       'state' => 2
     ]);
     $body = \ob_get_clean();
+    $data['json'] = json_encode($data);
     
     if ($this->mailTo($fullname, $email_address, 'MFC Application Submission', $body)->send()) {
       \ob_start();

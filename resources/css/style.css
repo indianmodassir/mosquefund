@@ -677,6 +677,163 @@ form:has(.vtable) {
   font-size: 22px;
 }
 
+/* DataInput */
+.track-status #window {
+  position: relative;
+  margin-bottom: 66px;
+  margin-top: 7%;
+  box-shadow: 0 2px 5px -1px #32325d40,0 1px 3px -1px #0000004d;
+  border-radius: 8px;
+  background: #fff;
+}
+.track-status #window::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  top: 0;
+  background: linear-gradient(119.54deg,#000046,#1cb5e0);
+  left: 0;
+  border-radius: 5px 5px 0 0;
+  height: 5px;
+}
+.track-status .input {
+  position: relative;
+  border-bottom: 1px solid #ccc;
+}
+.track-status input {
+  padding-top: 0px !important;
+  padding-left: 0 !important;
+  font-family: inherit;
+  border: none;
+  border-radius: 0px;
+  font-size: 17px;
+  max-width: 100% !important;
+  box-shadow: none !important;
+}
+.track-status .v-align {
+  margin-top: 33px;
+}
+.track-status .placeholder {
+  position: absolute;
+  font-size: 19px;
+  left: 0;
+  bottom: 7px;
+  pointer-events: none;
+  touch-action: none;
+  transition: all 0.2s ease-in-out;
+}
+.track-status canvas {
+  outline: 1px solid #ccc;
+  outline-offset: 4px;
+  border-radius: 1px;
+}
+.track-status input:focus + .placeholder,
+.track-status input:valid + .placeholder {
+  bottom: 33px;
+  font-size: 15px;
+}
+.track-status input:-internal-autofill-selected,
+.track-status input:autofill {
+  background: #fff !important;
+  box-shadow: 0 0 18px 18px #fff inset !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+.status-output {
+  margin-top: 33px;
+}
+.status-output svg {
+  fill: #fff;
+  color: #fff;
+  width: 21px;
+  height: 21px;
+}
+.status-output .tlabel {
+  font-size: 14px;
+  text-align: center;
+}
+.status-output .stages {
+  position: relative;
+  display: flex;
+  padding: 33px 22px;
+  justify-content: space-between;
+}
+.status-output .stages::after {
+  content: "";
+  width: calc(100% - 70px);
+  height: 3px;
+  top: calc(50% - 11px);
+  left: 50%;
+  position: absolute;
+  background: rgb(8, 99, 150);
+  transform: translate(-50%, -50%);
+}
+.status-output .stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  align-items: center;
+  z-index: 11;
+}
+.status-output .round {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 45px;
+  height: 45px;
+  padding: 8px;
+  background: rgb(25, 176, 220);
+  border: 3px solid rgb(8, 99, 150);
+  outline: 5px solid #fff;
+  border-radius: 50%;
+}
+.xpath {
+  fill: none;
+  stroke: currentcolor;
+  stroke-linejoin: round;
+  stroke-width: 3px;
+}
+.status-output .response-text {
+  margin-top: 22px;
+}
+.status-output .response-text p {
+  font-size: 17px;
+  color: #2072a0;
+  text-align: center;
+}
+.status-output .completed {
+  background: rgb(8, 99, 150);
+  border-color: rgb(8, 99, 150);
+}
+.track-status strong {
+  margin-top: 22px;
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+}
+.track-status strong ~ p {
+  font-size: 17px;
+  margin-top: 15px;
+}
+.track-status .s .round {
+  background: #fff;
+}
+.track-status .s0 .round {
+  background: #df4242;
+  border-color: #a32a2a;
+}
+.track-status .s svg {
+  width: 21px;
+  height: 21px;
+  fill: rgb(8, 99, 150);
+  color: rgb(8, 99, 150);
+}
+.status-output .response-text p.err0 {
+  color: #df4242;
+}
+
 @media only screen and (max-width: 1280px) {
   .middle-wrap {
     row-gap: 22px;
@@ -787,7 +944,7 @@ form:has(.vtable) {
   }
   form table:not(.tracker) :is(td, th, select, input):not(.nowrap) {
     white-space: nowrap;
-    font-size: 12px !important;
+    font-size: 13px !important;
   }
   form table:not(.tracker) :is(td, th) {
     padding: 6px !important;
@@ -797,10 +954,6 @@ form:has(.vtable) {
     font-size: 12px !important;
     height: 35px !important;
     padding: 0 11px !important;
-  }
-  #members-list :is(td, th) {
-    padding: 6px !important;
-    font-size: 12px !important;
   }
   #members-list tr :is(th, td):first-child {
     text-align: center;
@@ -841,7 +994,6 @@ form:has(.vtable) {
     white-space: nowrap;
   }
   #members-list {
-    padding: 11px;
     overflow: auto;
   }
   .not-found {
@@ -913,5 +1065,8 @@ form:has(.vtable) {
     flex-direction: column;
     row-gap: 18px;
     text-align: center;
+  }
+  input[type=number]#reqId {
+    flex-grow: 1;
   }
 }

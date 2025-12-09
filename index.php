@@ -161,6 +161,7 @@ footer i{ font-size: 22px;}
         border-bottom-right-radius: 0px;
         padding: 0 11px 0 43px;
         height: 42px;
+        text-overflow: ellipsis;
       ">
       <button style="
         border-top-left-radius: 0px;

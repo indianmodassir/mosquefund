@@ -11,7 +11,7 @@
   <script src="/resources/js/jquery.js"></script>
   <script src="/resources/js/provider.js"></script>
 </head>
-<body>
+<body style="display:flex;flex-direction:column;background:#eee;padding:11px;" class="track-status">
   <?php
     require 'vendor/autoload.php';
     if (!isset($_GET['stage'])) {

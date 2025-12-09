@@ -33,6 +33,14 @@ class ExpenseData
       'expenses' => $expenses->toArray()
     ];
 
+    $total_expense = 0;
+    foreach($vars['expenses'] as $expense) {
+      $total_expense += (int)$expense['amount'];
+    }
+
+    $vars['total_expense'] = $total_expense;
+    $vars['total_balance'] = $total_expense + \intval($vars['collected']);
+
     ob_start();
     \view('ExpenseRecord')->with($vars);
     $body = ob_get_clean();

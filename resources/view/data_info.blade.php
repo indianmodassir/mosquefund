@@ -5,7 +5,7 @@ $refno = \trim($_POST['reference-number']);
 $captcha = \trim($_POST['captcha']);
 
 $session = session();
-$refPattern = '/MFCSR\/[0-9]{4}\/[0-9]{7}/';
+$refPattern = '/^(?:(REF[0-9]{11})|(MFCSR\/[0-9]{4}\/[0-9]{7}))/';
 $expect_captcha = $session->get('captcha');
 $error = false;
 
@@ -41,22 +41,11 @@ if (!$modal) {
   exit;
 }
 
-$status = [
-  [
-    'task' => 'Application Submission',
-    'details' => 'Form Details',
-    'issued' => 'Aknowledgement and Application Form',
-    'status' => 'Completed',
-    'remarks' => 'N/A'
-  ],
-  [
-    'task' => 'Print Online Form Details',
-    'details' => 'N/A',
-    'issued' => 'Print Form Details',
-    'status' => 'Forwarded',
-    'remarks' => 'N/A'
-  ]
-];
+$error = null;
+$message = 'Your secretary registration request has been sent to HOA Administrator.';
+$verification = null;
+$validation = null;
+$completed = null;
 
 date_default_timezone_set('Asia/Kolkata');
 $forwarded_time = $modal->forwarded_time;
@@ -68,91 +57,59 @@ $forwarded_approval = $approval_time && $approval_time <= $time;
 $field_verification = $modal->field_verification;
 $approval = $modal->approval;
 
-$field_verified = $field_verification == 1;
-$field_rejected = !($field_verified || $field_verification == "");
-
 if ($forwarded_verification) {
-  \array_push($status, [
-    'task' => 'Field Verification for Secretary Registration',
-    'details' => 'N/A',
-    'issued' => $field_verification == "" ? 'Under Process' : 'Nil',
-    'status' => 'Forwarded',
-    'remarks' => $field_rejected ? '<a popovertarget="infoBox" onclick="showReason()">View</a>' : 'N/A'
-  ]);
+  $verification = 1;
+  $validation = $field_verification == "" ? "" : intval($field_verification != "");
+  $message = 'Your registration request has been forwarded to field verification.';
+  $error = $validation;
+
+  if ($validation != "") {
+    $message = 'Field verification has been completed, Forwarded to final approval.';
+  }
 }
 
-if ($field_verification) {
-  \array_push($status, [
-    'task' => $field_rejected ? 'Approval of Rejected False Application' : 'Approval of Verified True Application',
-    'details' => 'N/A',
-    'issued' => $approval === '' ? 'Under Process' : ($field_rejected || $approval == 0 ? '<a onclick="showReason(true)">Rejected Details</a>' : 'Nil'),
-    'status' => $approval === '' ? 'N/A' : ($field_rejected || $approval == 0 ? 'Rejected' : 'Delivered'),
-    'remarks' => 'N/A'
-  ]);
+if ($field_verification && $forwarded_approval) {
+  $completed = $approval;
+  $message = 'Final registration approval request is under process, Please check after few days.';
+  $error = $completed;
+  
+  if ($approval != "") {
+    if ($field_verification == 1 && $approval == 0) {
+      $field_verification = 'Your secretary registration request has been rejected, Contact to administrator.';
+      $error = 0;
+    }
+    $message = $approval == 1 ? 'Your secretary registration request has been approved. We delivered Login ID and Password in your mailbox.' : $field_verification;
+  }
 }
 @endphp
-<div id="infoBox" style="outline:none;border:1px solid #a5a5a5ff;" popover>
-  <div style="background:#eee;padding:4px 11px;text-align:end;color:#595757;">
-    <svg style="cursor:pointer;" onclick="$('#infoBox')[0].hidePopover()" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+<div class="status-output">
+  <div class="stages">
+    <div class="stage">
+      <div class="round">
+        <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="CreateIcon"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"></path></svg>
+      </div>
+      <div class="tlabel">Draft</div>
+    </div>
+    <div class="stage s{{$verification}}">
+      <div class="round">
+        <svg viewBox="0 0 15 11" class="xpath" style="width:15px;height:11px;"><path class="a" d="M12,0,4,8ZM0,4,4,8Z" transform="translate(1.5 1.5)"></path></svg>
+      </div>
+      <div class="tlabel">Verification</div>
+    </div>
+    <div class="stage s{{$validation}}">
+      <div class="round">
+        <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="SearchIcon"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg>
+      </div>
+      <div class="tlabel">Validation</div>
+    </div>
+    <div class="stage s{{$completed}}">
+      <div class="round completed">
+        <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ReplayIcon"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8"></path></svg>
+      </div>
+      <div class="tlabel">Completed</div>
+    </div>
   </div>
-  <div style="padding:11px;max-width:300px;">
-    <div id="rejected">{{$field_verification}}</div>
+  <div class="response-text">
+    <p class="err{{$error}}">{{$message}}</p>
   </div>
 </div>
-<table class="final-info details tracker" style="margin-top:22px;">
-  <tr>
-    <td>Application Reference Number :</td>
-    <td>{{$modal->reqid}}</td>
-  </tr>
-  <tr>
-    <td>Name of the Service :</td>
-    <td>Secretary Registration at Administrator level</td>
-  </tr>
-  <tr>
-    <td>Administrator Name :</td>
-    <td>Indian Modassir</td>
-  </tr>
-  <tr>
-    <td>Applicant Name :</td>
-    <td>{{$modal->fullname}}</td>
-  </tr>
-  <tr>
-    <td>Application due Date :</td>
-    <td>{{$modal->approval_date}}</td>
-  </tr>
-  <tr>
-</table>
-<div style="margin-top:22px;font-weight:500;font-size:15px;">Status Application Details / स्थिति आवेदन विवरण</div>
-<table class="final-info" style="margin-top:8px;">
-  <tr>
-    <th>S.No.</th>
-    <th>Task Name</th>
-    <th>Form Details</th>
-    <th>Issued Service</th>
-    <th>Status</th>
-    <th>Remarks</th>
-  </tr>
-  @foreach($status as $i => $data)
-  <tr>
-    <td>{{$i + 1}}</td>
-    <td>{{$data['task']}}</td>
-    <td>{{$data['details']}}</td>
-    <td>{{$data['issued']}}</td>
-    <td>{{$data['status']}}</td>
-    <td>{{$data['remarks']}}</td>
-  </tr>
-  @endforeach
-</table>
-<div style="font-size:15px;margin-top:11px;">Showing 1 to {{count($status)}} of 4 entries</div>
-<script>
-  let textBackup;
-  function showReason(rejected) {
-    if (rejected) {
-      if (!textBackup) textBackup = $('#rejected').text();
-      $('#rejected').text('ADMINISTRATOR (INDIAN MODASSIR) DVARA AAPKA REGISTRATION REQUEST REJECT KIYA JA CHUKA HAI. AAVEDAK DUBARA REGISTRATION KAR SAKTA HAI.');
-    } else if (textBackup) {
-      $('#rejected').text(textBackup);
-    }
-    $('#infoBox')[0].showPopover();
-  }
-</script>

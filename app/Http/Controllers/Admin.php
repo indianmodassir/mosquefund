@@ -170,7 +170,7 @@ class Admin extends MailSender
     $number = $req['number'];
     
     if ($field_verification == 0) $field_verification = $reason;
-    $field_verification = \strtoupper($field_verification);
+    $field_verification = ucwords(strtolower($field_verification));
     $modal = RequestModal::select('number', $number);
 
     if (!$modal) {
@@ -214,6 +214,7 @@ class Admin extends MailSender
     $district = ucwords($modal->district);
     $circle = ucwords($modal->circle);
     $village = ucwords($modal->village);
+    $approved = false;
 
     $random_char = str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
     $password = substr($random_char, 0, 8);
@@ -223,6 +224,7 @@ class Admin extends MailSender
 
       $collector_id = \rand(11111111, 99999999);
       $data = ['email' => $email, 'password' => $password];
+      $approved = true;
 
       $owner = new Owner;
       $owner->fullname = $fullname;
