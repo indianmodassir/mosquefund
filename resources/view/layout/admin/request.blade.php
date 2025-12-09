@@ -99,19 +99,18 @@
     }
   }
   function filterRequest() {
-    const expect_uid = $('#reqId').val().split('/').pop();
+    const expect_uid = $('#reqId').val().split('/').pop().replace('REF', '');
     if (!expect_uid) return;
     let matched = false;
 
     $('.reqid').each((_, el) => {
-      const uid = $(el).text().split('/').pop();
+      const uid = $(el).text().split('/').pop().replace('REF', '');
       const tr = $(el).parent();
       expect_uid == uid ? ($(tr).show(), matched = true) : $(tr).hide();
     });
 
     matched ?
-      ($('.not-found').hide(), $('.vtable').show())
-      : ($('.not-found').show(), $('.vtable').hide());
+      ($('.not-found').hide(), $('.vtable').show()) : ($('.not-found').show(), $('.vtable').hide());
   }
 
   function showData({
